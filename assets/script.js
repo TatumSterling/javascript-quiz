@@ -81,9 +81,7 @@ function checkAnswer(event){
 function nextQuestion () {
   currentIndex ++; 
   askCurrentQuestion();
-  answerChoiceText();
 }
-
 var secondsLeft = 60;
 
 function setTime() {
