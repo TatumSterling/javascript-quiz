@@ -47,6 +47,7 @@ console.log(currentQuestion.answers[3]);
 function askCurrentQuestion () {
     questionEl.innerHTML="";
     questionEl.textContent= currentQuestion.question;
+    quizContainer.style.display="block";
   // putting answer choice text in buttons
     choiceA.innerHTML= "";
     choiceA.textContent = currentQuestion.answers[0];
