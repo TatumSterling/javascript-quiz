@@ -1,3 +1,4 @@
+//global scope variables
 var startBtn = document.getElementById("start-btn");
 var timerEl = document.getElementById("timer");
 var quizContainer = document.getElementById("quiz-container");
@@ -31,6 +32,7 @@ var myQuestions = [
     correctAnswer: "d. 8",
   }
 ]
+
 var score = 0;
 var currentIndex = 0;
 var currentQuestion = myQuestions[currentIndex];
@@ -40,7 +42,12 @@ console.log(currentQuestion.answers);
 console.log(currentQuestion.answers[3]);
 
 
-function answerChoiceText () {
+
+//function to ask current question and display answer choices
+function askCurrentQuestion () {
+    questionEl.innerHTML="";
+    questionEl.textContent= currentQuestion.question;
+  // putting answer choice text in buttons
     choiceA.innerHTML= "";
     choiceA.textContent = currentQuestion.answers[0];
     choiceB.innerHTML = "";
@@ -50,13 +57,10 @@ function answerChoiceText () {
     choiceD.innerHTML = "";
     choiceD.textContent = currentQuestion.answers[3];
     answerContainer.addEventListener("click", checkAnswer);
-
 }
 
-function askCurrentQuestion () {
-    questionEl.innerHTML="";
-    questionEl.textContent= currentQuestion.question;
-}
+// function to listen to user 
+//answer choice and see if answer is correct
 
 function checkAnswer(event){
   var userChoice = event.target.textContent;
@@ -79,12 +83,27 @@ function nextQuestion () {
   answerChoiceText();
 }
 
+var secondsLeft = 60;
+
+function setTime() {
+  var timeInterval = setInterval(function() {
+    secondsLeft --;
+    timerEl.textContent = secondsLeft + " seconds left";
+
+    if (secondsLeft === 0 ) {
+      clearInterval(timeInterval);
+      alert("time is up");
+    }
+    }, 1000)
+}
+
+  startBtn.addEventListener("click", startQuiz );
 
 
 
 
+function startQuiz (){
+  askCurrentQuestion();
+  setTime();
+}
 
-
-
-answerChoiceText();
-askCurrentQuestion();
