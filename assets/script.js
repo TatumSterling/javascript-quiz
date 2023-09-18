@@ -13,6 +13,24 @@ var nextBtn = document.getElementById("next-btn");
 var score = 0;
 
 
+//timer element
+var secondsLeft = 60;
+
+function setTime() {
+  var timeInterval = setInterval(function () {
+    secondsLeft--;
+    timerEl.textContent = secondsLeft + " seconds left";
+
+    if (secondsLeft === 0) {
+      clearInterval(timeInterval);
+      alert("time is up");
+    }
+  }, 1000)
+}
+// end timer element
+
+
+
 var myQuestions = [
   {
     question: "what's 1+1?",
@@ -36,21 +54,7 @@ var myQuestions = [
   }
 ]
 
-//timer element
-var secondsLeft = 60;
 
-function setTime() {
-  var timeInterval = setInterval(function () {
-    secondsLeft--;
-    timerEl.textContent = secondsLeft + " seconds left";
-
-    if (secondsLeft === 0) {
-      clearInterval(timeInterval);
-      alert("time is up");
-    }
-  }, 1000)
-}
-// end timer element
 var currentIndex=0;
 
 
@@ -70,16 +74,22 @@ function askCurrentQuestion() {
     choiceC.textContent = currentQuestion.answers[2];
     choiceD.innerHTML = "";
     choiceD.textContent = currentQuestion.answers[3];
-    answerContainer.addEventListener("click", checkAnswer);
+
   
   //function to listen to user 
   //answer choice and see if answer is correct
 
   //TODO need to figure out why correct answer index is not increasing for answer choices
-  function checkAnswer(event) {
+
+}
+
+function checkAnswer(event) {
+  console.log(currentIndex, myQuestions.length);
+  if(currentIndex < myQuestions.length -1){
+    var currentCorrectAnswer = myQuestions[currentIndex];
     var userChoice = event.target.textContent;
     console.log("users choice was " + userChoice);
-    var correctAnswer = currentQuestion.correctAnswer;
+    var correctAnswer = currentCorrectAnswer.correctAnswer;
   
     if (userChoice === correctAnswer) {
       score++;
@@ -88,29 +98,28 @@ function askCurrentQuestion() {
       secondsLeft = secondsLeft - 10;
     }
     currentIndex ++;
-
-    if(currentIndex <= myQuestions.length){
-      askCurrentQuestion();
-    } else {
-      quizContainer.style.display= "none";
-      confirm("all done");
-    }
+    askCurrentQuestion();
+  } else {
+    quizContainer.style.display= "none";
+    alert("all done.");
   }
+
+
+
 }
 
 
-
-
 startBtn.addEventListener("click", startQuiz);
-
+answerContainer.addEventListener("click", checkAnswer);
 
 
 
 function startQuiz() {
   titleEl.innerHTML="Good Luck!!";
   startBtn.style.display="none";
-  askCurrentQuestion();
   setTime();
+  askCurrentQuestion();
+
 } 
 
 
