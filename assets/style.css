@@ -2,8 +2,8 @@
     background-color: #dcb6d5;
 }
 
-#quiz-container {
-    display: none;
+.quiz-container {
+    display: none; 
     flex-direction: column;
     justify-content: center;
     position: absolute;
@@ -14,7 +14,7 @@
     background-color: #b3b3f1;
 }
 
-#question {
+.question {
     text-align: center;
     background-color: #b3b3f1;
 }
@@ -43,6 +43,7 @@
 #title {
     text-align: center;
     background-color: #b3b3f1;
+    display: block;
 }
 
 #high-scores {
