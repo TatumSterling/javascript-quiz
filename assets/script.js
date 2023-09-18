@@ -6,6 +6,8 @@ var choiceA = document.getElementById("a");
 var choiceB = document.getElementById("b");
 var choiceC = document.getElementById("c");
 var choiceD = document.getElementById("d");
+var answerContainer = document.getElementById("answer-container");
+var nextbtn = document.getElementById("next-btn");
 
 var myQuestions = [
   {
@@ -29,7 +31,7 @@ var myQuestions = [
     correctAnswer: "d. 8",
   }
 ]
-
+var score = 0;
 var currentIndex = 0;
 var currentQuestion = myQuestions[currentIndex];
 console.log(currentQuestion);
@@ -47,6 +49,7 @@ function answerChoiceText () {
     choiceC.textContent = currentQuestion.answers[2];
     choiceD.innerHTML = "";
     choiceD.textContent = currentQuestion.answers[3];
+    answerContainer.addEventListener("click", checkAnswer);
 
 }
 
@@ -54,6 +57,34 @@ function askCurrentQuestion () {
     questionEl.innerHTML="";
     questionEl.textContent= currentQuestion.question;
 }
+
+function checkAnswer(event){
+  var userChoice = event.target.textContent;
+  console.log("users choice was " + userChoice);
+  var correctAnswer = currentQuestion.correctAnswer;
+  console.log("the correct answer is " + correctAnswer);
+
+  if (userChoice === correctAnswer) {
+    score ++;
+    console.log("score is now " + score);
+  } else {
+    console.log("wrong");
+  }
+  nextbtn.addEventListener("click", nextQuestion);
+}
+// TODO need to fix bug in next question
+function nextQuestion () {
+  currentIndex ++; 
+  askCurrentQuestion();
+  answerChoiceText();
+}
+
+
+
+
+
+
+
 
 answerChoiceText();
 askCurrentQuestion();
