@@ -70,6 +70,46 @@
    width: 100px;
 }
 
-#next-btn {
+#input {
+    background-color: #cf8ba9;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 40%;
+    left: 24%;
+    top: 35%;
+    border: solid black;
+    display: none;
+    }
+
+#initials {
     background-color: #b3b3f1;
+    width: 75%;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#high-score-initials {
+    width: 75%;
+    height: 30%;
+    position: absolute;
+    text-align: center;
+    font-size: larger;
+}
+
+#submit-initials {
+    position: absolute;
+    bottom: 20%;
+    width: 20%;
+    height: 10%;
+}
+
+#submit-initials:hover {
+    background-color: #b15e6c;
 }

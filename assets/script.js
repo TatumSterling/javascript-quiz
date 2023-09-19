@@ -10,8 +10,10 @@ var choiceC = document.getElementById("c");
 var choiceD = document.getElementById("d");
 var answerContainer = document.getElementById("answer-container");
 var nextBtn = document.getElementById("next-btn");
+var initialsInput = document.getElementById("high-score-initials");
+var submitBtn = document.getElementById("submit-initials");
+var highScoreScreen= document.getElementById("input");
 var score = 0;
-
 
 //timer element
 var secondsLeft = 60;
@@ -101,7 +103,7 @@ function checkAnswer(event) {
     askCurrentQuestion();
   } else {
     quizContainer.style.display= "none";
-    alert("all done.");
+    highScoreScreen.style.display="flex";
   }
 
 
@@ -111,7 +113,7 @@ function checkAnswer(event) {
 
 startBtn.addEventListener("click", startQuiz);
 answerContainer.addEventListener("click", checkAnswer);
-
+submitBtn.addEventListener("click", renderLastHighscore)
 
 
 function startQuiz() {
@@ -121,5 +123,9 @@ function startQuiz() {
   askCurrentQuestion();
 
 } 
+
+function showResult () {
+  
+}
 
 
