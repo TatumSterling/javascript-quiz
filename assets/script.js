@@ -9,11 +9,15 @@ var choiceB = document.getElementById("b");
 var choiceC = document.getElementById("c");
 var choiceD = document.getElementById("d");
 var answerContainer = document.getElementById("answer-container");
-var nextBtn = document.getElementById("next-btn");
 var initialsInput = document.getElementById("high-score-initials");
 var submitBtn = document.getElementById("submit-initials");
 var highScoreScreen= document.getElementById("input");
+var highScoreBtn = document.getElementById("high-scores");
+var userScore = document.getElementById("user-score");
+var lastUserDisplay = document.getElementById("render-last-user");
+var restartBtn = document.getElementById("restart");
 var score = 0;
+
 
 //timer element
 var secondsLeft = 60;
@@ -35,24 +39,24 @@ function setTime() {
 
 var myQuestions = [
   {
-    question: "what's 1+1?",
-    answers: ["a. 2", "b. 4", "c. 6", "d. 8"],
-    correctAnswer: "a. 2",
+    question: "How do you display something in the console ?",
+    answers: ["a. console.log ();", "b. alert();", "c. prompt();", "d. confirm():"],
+    correctAnswer: "a. console.log ();",
   },
   {
-    question: "what's 2+2?",
-    answers: ["a. 4", "b. 2", "c. 6", "d. 8"],
-    correctAnswer: "a. 4",
+    question: "What is the function declaration format?",
+    answers: ["a. function = (declaration)", "b. function myFunction() = {}", "c. function = myFunction() {}", "d. myFunction = fucntion(){}"],
+    correctAnswer: "b. function myFunction() = {}",
   },
   {
-    question: "what's 3+3?",
-    answers: ["a. 6", "b. 4", "c. 2", "d. 8"],
-    correctAnswer: "a. 6",
+    question: "what can methods be attached to?",
+    answers: ["a. variables", "b. arrays", "c. strings", "d. all of the above"],
+    correctAnswer: "d. all of the above",
   },
   {
-    question: "what's 4+4?",
-    answers: ["a. 8", "b. 4", "c. 6", "d. 2"],
-    correctAnswer: "a. 8",
+    question: "who created javascript?",
+    answers: ["a. Brendan Eich", "b. Bill Gates", "c. Steve Jobs", "d. Elon Musk"],
+    correctAnswer: "a. Brendan Eich",
   }
 ]
 
@@ -81,20 +85,19 @@ function askCurrentQuestion() {
   //function to listen to user 
   //answer choice and see if answer is correct
 
-  //TODO need to figure out why correct answer index is not increasing for answer choices
 
 }
 
 function checkAnswer(event) {
   console.log(currentIndex, myQuestions.length);
-  if(currentIndex < myQuestions.length -1){
+  if(currentIndex < myQuestions.length -1 ){
     var currentCorrectAnswer = myQuestions[currentIndex];
     var userChoice = event.target.textContent;
     console.log("users choice was " + userChoice);
     var correctAnswer = currentCorrectAnswer.correctAnswer;
   
     if (userChoice === correctAnswer) {
-      score++;
+      score = score +32;
       console.log("score is now " + score);
     } else {
       secondsLeft = secondsLeft - 10;
@@ -103,29 +106,40 @@ function checkAnswer(event) {
     askCurrentQuestion();
   } else {
     quizContainer.style.display= "none";
-    highScoreScreen.style.display="flex";
+    showResult();
   }
-
-
-
 }
 
 
 startBtn.addEventListener("click", startQuiz);
 answerContainer.addEventListener("click", checkAnswer);
-submitBtn.addEventListener("click", renderLastHighscore)
+submitBtn.addEventListener("click", function() {
+  localStorage.setItem("last-user", initialsInput.value);
+}
+);
 
+highScoreBtn.addEventListener("click", showResult)
 
 function startQuiz() {
   titleEl.innerHTML="Good Luck!!";
   startBtn.style.display="none";
+  highScoreScreen.style.display="none";
   setTime();
   askCurrentQuestion();
 
 } 
 
 function showResult () {
-  
+  highScoreScreen.style.display="flex";
+  userScore.innerHTML="Your score is " + score + "%";
+  var lastUser=localStorage.getItem("last-user");
+  lastUserDisplay.innerHTML= "highscore:  " + lastUser;
+  timerEl.style.display="none";
+  titleEl.innerHTML="Javascript Quiz Results"
+  restartBtn.style.display="block";
+
+
 }
+
 
 
