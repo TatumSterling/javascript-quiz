@@ -9,7 +9,7 @@ N/A
 ## Usage
 To deploy the application, simply click on the link at the top of the README. From there you will be taken to the start screen of the quiz, and can decide when you would like to begin by pressing the start button. 
 
-
+![alt text](assets/images/2023-09-18.png)
 
 ## Credits
 N/A
